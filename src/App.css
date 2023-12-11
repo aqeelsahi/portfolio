@@ -71,14 +71,6 @@ body {
         --bs-btn-active-border-color: #5a23c8;
       }
 
-      .bd-mode-toggle {
-        z-index: 1500;
-      }
-
-      .bd-mode-toggle .dropdown-menu .active .bi {
-        display: block !important;
-      }
-
       /* Define background colors for light and dark modes */
     .app.light-mode {
         --bs-bg-opacity: 1;
