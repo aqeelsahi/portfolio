@@ -3,12 +3,13 @@ import './App.css';
 import Signin from './components/Signin';
 import ModeSelector from './components/ModeSelector/indext';
 import Main from './components/Main';
-import Toast from './components/Toast';
-import Cover from './components/Cover';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Admin from './components/Admin';
+import NotFound from './components/NotFound';
 
 const App = () => {
   const [mode, setMode] = useState<string>('');
-
+const currentUser = false;
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme) {
@@ -25,16 +26,22 @@ const App = () => {
   
   return (
     <div className={`app ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
-      {/* <Signin/> */}
-      {/* <Main/> */}
-      {/* <Toast
-        title={'Aqeel'}
-        subTitle='11 mins ago'
-        text={'Hello, world! This is a toast message.'}
-        closeBtn
-        actionBtn={{label: 'Submit', onClick:()=> console.log('submitted')}}
-      /> */}
-      <Cover/>
+          {/* {currentUser ? (
+            <button
+            type='button'
+              color="secondary"
+              onClick={logOut}
+            >Logout</button>
+          ) : null} */}
+      <BrowserRouter>
+        <Routes>
+          <Route index path="/" element={ <Main />} />
+          <Route path="admin" element={currentUser ? <Admin /> : <Signin />} />
+          <Route path="signin" element={currentUser ? <Admin /> : <Signin />} />
+          <Route path="*" element={ <NotFound />} />
+        </Routes>
+      </BrowserRouter>
+
       <ModeSelector mode={mode} setMode={setMode}/>
     </div>
   );
